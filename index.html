@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Millonarios FC · Sitio de hinchas</title>
+  <meta name="description" content="Sitio de hinchas de Millonarios FC: próximo partido, noticias, plantilla, tabla de posiciones, historia y palmarés del Embajador. 80 años de historia azul.">
+  <meta name="author" content="John Alexander Pardo González">
+  <meta name="theme-color" content="#0b2a8c">
+
+  <!-- Open Graph (vista previa al compartir el enlace) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Millonarios FC · Sitio de hinchas">
+  <meta property="og:description" content="80 años de historia azul. Partidos, plantilla, tabla y palmarés del Embajador.">
+  <meta property="og:image" content="hero.jpg">
+  <meta property="og:locale" content="es_CO">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+  <!-- =========================================================
+       SPRITE DE ÍCONOS SVG (se reutilizan con <use href="#id">)
+       ========================================================= -->
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.5L12 17.3l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8z" fill="currentColor"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 6v12" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8M9 18h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5l3.8 2.8-1.5 4.5H9.7l-1.5-4.5zM12 7.5V3M15.8 10.3l4.3-1.4M14.3 14.8l2.7 3.7M9.7 14.8L7 18.5M8.2 10.3L3.9 8.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8 3l-5 3 2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+  </svg>
+
+  <!-- Enlace para saltar al contenido (accesibilidad con teclado) -->
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- Pantalla de carga -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <img class="preloader__logo" src="escudo.png" alt="">
+    <span class="preloader__bar"></span>
+  </div>
+
+  <!-- Barra de progreso de lectura -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       1. ENCABEZADO Y NAVEGACIÓN
+       ========================================================= -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a class="brand" href="#inicio" aria-label="Millonarios FC, ir al inicio">
+        <img class="brand__logo" src="escudo.png" alt="Escudo de Millonarios FC" width="44" height="44">
+        <span class="brand__text">
+          <span class="brand__name">Millonarios</span>
+          <span class="brand__tag">Sitio de hinchas</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a class="nav__link is-active" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#partido">Partidos</a></li>
+          <li><a class="nav__link" href="#noticias">Noticias</a></li>
+          <li><a class="nav__link" href="#plantilla">Plantilla</a></li>
+          <li><a class="nav__link" href="#tabla">Tabla</a></li>
+          <li><a class="nav__link" href="#historia">Historia</a></li>
+          <li><a class="nav__link" href="#galeria">Galería</a></li>
+          <li><a class="nav__link" href="#tienda">Tienda</a></li>
+          <li><a class="nav__link" href="#hinchada">Hinchada</a></li>
+        </ul>
+        <a class="btn btn--gold nav__cta-mobile" href="https://www.entradasmillonarios.com/" target="_blank" rel="noopener">
+          <svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg> Comprar boletas
+        </a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo oscuro" aria-pressed="false">
+          <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <a class="btn btn--gold header__cta" href="https://www.entradasmillonarios.com/" target="_blank" rel="noopener">
+          <svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg> Boletas
+        </a>
+        <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+          <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- =========================================================
+         2. HERO
+         ========================================================= -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <img class="hero__img" src="hero.jpg" alt="">
+        <div class="hero__overlay"></div>
+        <div class="hero__stripes"></div>
+      </div>
+
+      <div class="hero__content container">
+        <p class="hero__eyebrow" data-reveal>
+          <span class="pill pill--gold">80 años</span> 1946 — 2026 · Bogotá, Colombia
+        </p>
+
+        <h1 class="hero__title" id="hero-title" data-reveal>
+          <span class="hero__title-line">Somos</span>
+          <span class="hero__title-line hero__title-line--outline">Millonarios</span>
+        </h1>
+
+        <p class="hero__subtitle" data-reveal>
+          El Embajador. El Ballet Azul. Dieciséis estrellas y una hinchada que nunca deja de cantar en El Campín.
+        </p>
+
+        <!-- 16 estrellas de Liga -->
+        <div class="hero__stars" aria-label="16 estrellas de Liga" role="img" data-reveal>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
+        </div>
+
+        <div class="hero__actions" data-reveal>
+          <a class="btn btn--gold btn--lg" href="#partido">
+            Próximo partido <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+          <a class="btn btn--glass btn--lg" href="#historia">Nuestra historia</a>
+        </div>
+      </div>
+
+      <a class="hero__scroll" href="#partido" aria-label="Bajar a la siguiente sección">
+        <span class="hero__scroll-mouse"></span>
+      </a>
+    </section>
+
+    <!-- =========================================================
+         3. PRÓXIMO PARTIDO + ÚLTIMOS RESULTADOS
+         (los datos los llena main.js)
+         ========================================================= -->
+    <section class="section match" id="partido" aria-labelledby="match-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__kicker">Agenda azul</p>
+          <h2 class="section__title" id="match-title">Próximo partido</h2>
+        </header>
+
+        <article class="match-card glass" data-reveal>
+          <p class="match-card__competition" id="match-competition">Liga BetPlay</p>
+
+          <div class="match-card__teams">
+            <div class="team">
+              <img class="team__logo" id="match-home-logo" src="escudo.png" alt="" width="88" height="88">
+              <span class="team__name" id="match-home">Millonarios</span>
+              <span class="team__tag" id="match-home-tag">Local</span>
+            </div>
+
+            <div class="match-card__vs">
+              <span class="match-card__vs-text">VS</span>
+              <span class="match-card__round" id="match-round"></span>
+            </div>
+
+            <div class="team">
+              <span class="team__badge" id="match-away-badge" aria-hidden="true"></span>
+              <span class="team__name" id="match-away">Rival</span>
+              <span class="team__tag" id="match-away-tag">Visitante</span>
+            </div>
+          </div>
+
+          <ul class="match-card__info">
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+              <time id="match-date">Fecha por confirmar</time>
+            </li>
+            <li>
+              <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+              <span id="match-venue">Estadio El Campín, Bogotá</span>
+            </li>
+          </ul>
+
+          <!-- Cuenta regresiva -->
+          <div class="countdown" id="countdown" role="timer" aria-live="off" aria-label="Cuenta regresiva para el partido">
+            <div class="countdown__item"><span class="countdown__num" data-unit="days">00</span><span class="countdown__label">Días</span></div>
+            <div class="countdown__item"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__label">Horas</span></div>
+            <div class="countdown__item"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__label">Min</span></div>
+            <div class="countdown__item"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__label">Seg</span></div>
+          </div>
+          <p class="countdown__live" id="countdown-live" hidden>¡Se está jugando! Vamos Millos 💙</p>
+
+          <div class="match-card__actions">
+            <a class="btn btn--gold" href="https://www.entradasmillonarios.com/" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg> Comprar boletas
+            </a>
+            <a class="btn btn--ghost" href="#tabla">Ver tabla</a>
+          </div>
+        </article>
+
+        <!-- Últimos resultados -->
+        <div class="results" data-reveal>
+          <h3 class="results__title">Últimos resultados</h3>
+          <ul class="results__list" id="results-list">
+            <!-- main.js inserta aquí los resultados -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. CIFRAS DEL CLUB (contadores animados)
+         ========================================================= -->
+    <section class="stats" aria-label="El club en cifras">
+      <div class="stats__inner container">
+        <div class="stat" data-reveal>
+          <svg class="stat__icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="stat__num" data-count="1946">0</span>
+          <span class="stat__label">Año de fundación</span>
+        </div>
+        <div class="stat" data-reveal>
+          <svg class="stat__icon" aria-hidden="true"><use href="#i-ball"/></svg>
+          <span class="stat__num" data-count="80">0</span>
+          <span class="stat__label">Años de historia</span>
+        </div>
+        <div class="stat" data-reveal>
+          <svg class="stat__icon" aria-hidden="true"><use href="#i-star"/></svg>
+          <span class="stat__num" data-count="16">0</span>
+          <span class="stat__label">Estrellas de Liga</span>
+        </div>
+        <div class="stat" data-reveal>
+          <svg class="stat__icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+          <span class="stat__num" data-count="22">0</span>
+          <span class="stat__label">Títulos oficiales</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. NOTICIAS (las tarjetas las genera main.js)
+         ========================================================= -->
+    <section class="section news" id="noticias" aria-labelledby="news-title">
+      <div class="container">
+        <header class="section__head section__head--row" data-reveal>
+          <div>
+            <p class="section__kicker">Actualidad</p>
+            <h2 class="section__title" id="news-title">Últimas noticias</h2>
+          </div>
+          <a class="link-arrow" href="https://millonarios.com.co/noticias/" target="_blank" rel="noopener">
+            Ver todas en el sitio oficial <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </header>
+
+        <div class="news__grid" id="news-grid">
+          <!-- main.js inserta aquí las noticias -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. PLANTILLA (pestañas + filtro por posición)
+         ========================================================= -->
+    <section class="section squad" id="plantilla" aria-labelledby="squad-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__kicker">Temporada 2026</p>
+          <h2 class="section__title" id="squad-title">Plantilla</h2>
+        </header>
+
+        <div class="tabs" role="tablist" aria-label="Equipo" data-reveal>
+          <button class="tabs__btn is-active" type="button" role="tab" id="tab-masculino" aria-selected="true" aria-controls="squad-grid" data-team="masculino">Masculino</button>
+          <button class="tabs__btn" type="button" role="tab" id="tab-femenino" aria-selected="false" aria-controls="squad-grid" data-team="femenino">Femenino</button>
+          <span class="tabs__indicator" aria-hidden="true"></span>
+        </div>
+
+        <div class="filters" id="squad-filters" role="group" aria-label="Filtrar por posición" data-reveal>
+          <button class="chip is-active" type="button" data-position="todos" aria-pressed="true">Todos</button>
+          <button class="chip" type="button" data-position="arquero" aria-pressed="false">Arqueros</button>
+          <button class="chip" type="button" data-position="defensa" aria-pressed="false">Defensas</button>
+          <button class="chip" type="button" data-position="volante" aria-pressed="false">Volantes</button>
+          <button class="chip" type="button" data-position="delantero" aria-pressed="false">Delanteros</button>
+        </div>
+
+        <p class="squad__coach" id="squad-coach"></p>
+
+        <div class="squad__grid" id="squad-grid" role="tabpanel" aria-labelledby="tab-masculino" aria-live="polite">
+          <!-- main.js inserta aquí las tarjetas de jugadores -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. TABLA DE POSICIONES
+         ========================================================= -->
+    <section class="section standings" id="tabla" aria-labelledby="standings-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__kicker" id="standings-tournament">Liga BetPlay 2026-II</p>
+          <h2 class="section__title" id="standings-title">Tabla de posiciones</h2>
+        </header>
+
+        <div class="table-wrap glass" data-reveal>
+          <table class="table">
+            <caption class="sr-only">Tabla de posiciones de la Liga BetPlay</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="table__pos">#</th>
+                <th scope="col" class="table__team">Equipo</th>
+                <th scope="col" title="Partidos jugados">PJ</th>
+                <th scope="col" title="Ganados" class="hide-sm">G</th>
+                <th scope="col" title="Empatados" class="hide-sm">E</th>
+                <th scope="col" title="Perdidos" class="hide-sm">P</th>
+                <th scope="col" title="Diferencia de gol">DG</th>
+                <th scope="col" title="Puntos" class="table__pts">PTS</th>
+              </tr>
+            </thead>
+            <tbody id="standings-body">
+              <!-- main.js inserta aquí las filas -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="standings__legend" data-reveal>
+          <span class="legend legend--zone">Clasificación a cuadrangulares (top 8)</span>
+          <span class="legend legend--millos">Millonarios</span>
+          <span class="standings__updated" id="standings-updated"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. HISTORIA Y PALMARÉS
+         ========================================================= -->
+    <section class="section history" id="historia" aria-labelledby="history-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__kicker">Desde 1946</p>
+          <h2 class="section__title" id="history-title">Historia y palmarés</h2>
+        </header>
+
+        <!-- Intro con imagen -->
+        <div class="history__intro">
+          <figure class="history__figure" data-reveal>
+            <img src="historia.jpg" alt="Imagen histórica de Millonarios" loading="lazy">
+            <figcaption>El Ballet Azul, la época de El Dorado</figcaption>
+          </figure>
+          <div class="history__text" data-reveal>
+            <h3>El Embajador del fútbol colombiano</h3>
+            <p>
+              Millonarios nació oficialmente el 18 de junio de 1946 en Bogotá. Pocos años después, en la época de
+              El Dorado, armó uno de los equipos más recordados de la historia del fútbol: el <strong>Ballet Azul</strong>,
+              con figuras como Adolfo Pedernera y Alfredo Di Stéfano, que llevó el nombre del club por el mundo.
+            </p>
+            <p>
+              Fue el primer tricampeón y el primer tetracampeón del país, y hoy suma 16 estrellas de Liga y 22 títulos
+              oficiales. En 2026 celebra 80 años como uno de los clubes más grandes de Colombia.
+            </p>
+          </div>
+        </div>
+
+        <!-- Palmarés -->
+        <div class="trophies">
+          <article class="trophy glass" data-reveal>
+            <svg class="trophy__icon" aria-hidden="true"><use href="#i-star"/></svg>
+            <span class="trophy__count" data-count="16">0</span>
+            <h3 class="trophy__name">Liga colombiana</h3>
+            <p class="trophy__years">1949 · 1951 · 1952 · 1953 · 1959 · 1961 · 1962 · 1963 · 1964 · 1972 · 1978 · 1987 · 1988 · 2012-II · 2017-II · 2023-I</p>
+          </article>
+          <article class="trophy glass" data-reveal>
+            <svg class="trophy__icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+            <span class="trophy__count" data-count="3">0</span>
+            <h3 class="trophy__name">Copa Colombia</h3>
+            <p class="trophy__years">1952-53 · 2011 · 2022</p>
+          </article>
+          <article class="trophy glass" data-reveal>
+            <svg class="trophy__icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+            <span class="trophy__count" data-count="2">0</span>
+            <h3 class="trophy__name">Superliga</h3>
+            <p class="trophy__years">2018 · 2024</p>
+          </article>
+          <article class="trophy glass" data-reveal>
+            <svg class="trophy__icon" aria-hidden="true"><use href="#i-trophy"/></svg>
+            <span class="trophy__count" data-count="1">0</span>
+            <h3 class="trophy__name">Copa Merconorte</h3>
+            <p class="trophy__years">2001</p>
+          </article>
+        </div>
+
+        <!-- Línea de tiempo -->
+        <h3 class="history__subtitle" data-reveal>Momentos que nos hicieron grandes</h3>
+        <ol class="timeline">
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">1946</span>
+            <div class="timeline__card">
+              <h4>Nace el club</h4>
+              <p>El 18 de junio se funda oficialmente Millonarios en Bogotá.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">1949</span>
+            <div class="timeline__card">
+              <h4>La primera estrella</h4>
+              <p>En plena época de El Dorado, con Pedernera y Di Stéfano, llega el primer título de Liga.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">1951–53</span>
+            <div class="timeline__card">
+              <h4>El Ballet Azul y el primer tricampeonato</h4>
+              <p>Tres Ligas seguidas y un juego que deslumbró en Colombia y en el exterior, incluida una histórica gira por Europa.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">1961–64</span>
+            <div class="timeline__card">
+              <h4>Primer tetracampeón</h4>
+              <p>Con Gabriel Ochoa Uribe en el banco, Millonarios gana cuatro Ligas consecutivas, algo nunca antes visto en el país.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">1987–88</span>
+            <div class="timeline__card">
+              <h4>Bicampeonato</h4>
+              <p>Dos títulos seguidos para llegar a la estrella 13.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">2001</span>
+            <div class="timeline__card">
+              <h4>Gloria internacional</h4>
+              <p>Campeón de la Copa Merconorte ante Emelec de Ecuador, primer título internacional oficial.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">2012</span>
+            <div class="timeline__card">
+              <h4>La 14, después de 24 años</h4>
+              <p>Se rompe la sequía con el título del Finalización ante Independiente Medellín.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">2017</span>
+            <div class="timeline__card">
+              <h4>La 15 en el clásico</h4>
+              <p>Final capitalina ante Santa Fe y estrella número 15.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">2023</span>
+            <div class="timeline__card">
+              <h4>La 16 en El Campín</h4>
+              <p>Final ante Atlético Nacional definida por penales, con el estadio lleno de azul.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__year">2024</span>
+            <div class="timeline__card">
+              <h4>Segunda Superliga</h4>
+              <p>Remontada ante Junior en Bogotá para llegar a 22 títulos oficiales.</p>
+            </div>
+          </li>
+          <li class="timeline__item timeline__item--gold" data-reveal>
+            <span class="timeline__year">2026</span>
+            <div class="timeline__card">
+              <h4>80 años de historia</h4>
+              <p>Ocho décadas de un sentimiento azul que pasa de generación en generación.</p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- El Campín -->
+        <div class="stadium" data-reveal>
+          <img class="stadium__img" src="campin.jpg" alt="Estadio Nemesio Camacho El Campín" loading="lazy">
+          <div class="stadium__content glass">
+            <p class="section__kicker">Nuestra casa</p>
+            <h3>Estadio Nemesio Camacho El Campín</h3>
+            <p>En el corazón de Bogotá, inaugurado en 1938. Aquí se han vivido las noches más azules de nuestra historia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         9. GALERÍA (visor a pantalla completa con main.js)
+         ========================================================= -->
+    <section class="section gallery" id="galeria" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="section__kicker">Momentos</p>
+          <h2 class="section__title" id="gallery-title">Galería</h2>
+        </header>
+
+        <div class="gallery__grid">
+          <figure class="gallery__item gallery__item--wide" data-reveal>
+            <button class="gallery__btn" type="button" data-index="0" aria-label="Ampliar imagen 1">
+              <img src="galeria-1.jpg" alt="La hinchada azul en El Campín" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>La hinchada azul en El Campín</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--tall" data-reveal>
+            <button class="gallery__btn" type="button" data-index="1" aria-label="Ampliar imagen 2">
+              <img src="galeria-2.jpg" alt="Celebración de gol" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>Grito de gol</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <button class="gallery__btn" type="button" data-index="2" aria-label="Ampliar imagen 3">
+              <img src="galeria-3.jpg" alt="El equipo antes del partido" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>Once titular</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <button class="gallery__btn" type="button" data-index="3" aria-label="Ampliar imagen 4">
+              <img src="galeria-4.jpg" alt="Banderas azules en la tribuna" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>Tribuna azul</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--tall" data-reveal>
+            <button class="gallery__btn" type="button" data-index="4" aria-label="Ampliar imagen 5">
+              <img src="galeria-5.jpg" alt="Jugador de Millonarios en acción" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>En la cancha</figcaption>
+          </figure>
+          <figure class="gallery__item gallery__item--wide" data-reveal>
+            <button class="gallery__btn" type="button" data-index="5" aria-label="Ampliar imagen 6">
+              <img src="galeria-6.jpg" alt="El estadio de noche" loading="lazy">
+              <span class="gallery__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption>Noche azul</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         10. TIENDA (los productos los genera main.js)
+         ========================================================= -->
+    <section class="section shop" id="tienda" aria-labelledby="shop-title">
+      <div class="container">
+        <header class="section__head section__head--row" data-reveal>
+          <div>
+            <p class="section__kicker">Viste la camiseta</p>
+            <h2 class="section__title" id="shop-title">Tienda</h2>
+          </div>
+          <a class="link-arrow" href="https://tiendamillonarios.com.co/" target="_blank" rel="noopener">
+            Ir a la tienda oficial <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </header>
+
+        <div class="shop__grid" id="shop-grid">
+          <!-- main.js inserta aquí los productos -->
+        </div>
+
+        <p class="shop__note" data-reveal>
+          Los precios son de referencia. Las compras se hacen únicamente en la tienda oficial del club.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         11. ÚNETE A LA HINCHADA (formulario con validación en main.js)
+         ========================================================= -->
+    <section class="section join" id="hinchada" aria-labelledby="join-title">
+      <div class="join__bg" aria-hidden="true"></div>
+      <div class="container join__inner">
+        <div class="join__text" data-reveal>
+          <p class="section__kicker section__kicker--light">La 12</p>
+          <h2 class="section__title section__title--light" id="join-title">Únete a la hinchada</h2>
+          <p>
+            Recibe en tu correo los partidos de la semana, las noticias más importantes y todo lo que pasa con el Embajador.
+            Sin spam, solo fútbol azul.
+          </p>
+          <ul class="join__perks">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Recordatorio antes de cada partido</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Resumen semanal de noticias</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fechas de venta de boletería</li>
+          </ul>
+        </div>
+
+        <form class="join__form glass" id="join-form" novalidate data-reveal>
+          <div class="field">
+            <label class="field__label" for="join-name">Nombre</label>
+            <input class="field__input" type="text" id="join-name" name="nombre" autocomplete="name" placeholder="Tu nombre" required minlength="2">
+            <span class="field__error" id="join-name-error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="join-email">Correo electrónico</label>
+            <input class="field__input" type="email" id="join-email" name="correo" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+            <span class="field__error" id="join-email-error" aria-live="polite"></span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="join-since">¿Desde cuándo eres hincha?</label>
+            <select class="field__input" id="join-since" name="desde" required>
+              <option value="">Selecciona una opción</option>
+              <option value="nacimiento">Desde que nací</option>
+              <option value="infancia">Desde niño(a)</option>
+              <option value="reciente">Hace pocos años</option>
+              <option value="nuevo">Me estoy volviendo azul</option>
+            </select>
+            <span class="field__error" id="join-since-error" aria-live="polite"></span>
+          </div>
+
+          <div class="field field--check">
+            <input type="checkbox" id="join-terms" name="acepto" required>
+            <label for="join-terms">Acepto recibir correos de este sitio de hinchas.</label>
+            <span class="field__error" id="join-terms-error" aria-live="polite"></span>
+          </div>
+
+          <button class="btn btn--gold btn--block" type="submit">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Quiero ser parte
+          </button>
+
+          <p class="join__success" id="join-success" role="status" hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+            <span>¡Bienvenido(a) a la hinchada azul!</span>
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       12. FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="footer__top container">
+      <div class="footer__brand">
+        <a class="brand" href="#inicio" aria-label="Volver al inicio">
+          <img class="brand__logo" src="escudo.png" alt="" width="52" height="52">
+          <span class="brand__text">
+            <span class="brand__name">Millonarios</span>
+            <span class="brand__tag">Sitio de hinchas</span>
+          </span>
+        </a>
+        <p>80 años de historia azul. Hecho con pasión por un hincha del Embajador.</p>
+        <ul class="socials" aria-label="Redes oficiales del club">
+          <li><a class="socials__link" href="https://www.facebook.com/millosfcoficial/" target="_blank" rel="noopener" aria-label="Facebook">FB</a></li>
+          <li><a class="socials__link" href="https://www.instagram.com/millosfcoficial/" target="_blank" rel="noopener" aria-label="Instagram">IG</a></li>
+          <li><a class="socials__link" href="https://www.youtube.com/channel/UCJ3KWv64AxrdfKRFKr2uBSw" target="_blank" rel="noopener" aria-label="YouTube">YT</a></li>
+          <li><a class="socials__link" href="https://www.tiktok.com/@millosfcoficial" target="_blank" rel="noopener" aria-label="TikTok">TT</a></li>
+          <li><a class="socials__link" href="https://twitter.com/MillosFCoficial" target="_blank" rel="noopener" aria-label="X">X</a></li>
+        </ul>
+      </div>
+
+      <nav class="footer__col" aria-label="Secciones">
+        <h3 class="footer__title">Secciones</h3>
+        <ul>
+          <li><a href="#partido">Partidos</a></li>
+          <li><a href="#noticias">Noticias</a></li>
+          <li><a href="#plantilla">Plantilla</a></li>
+          <li><a href="#tabla">Tabla</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#galeria">Galería</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-label="Enlaces oficiales">
+        <h3 class="footer__title">Oficial</h3>
+        <ul>
+          <li><a href="https://millonarios.com.co/" target="_blank" rel="noopener">Sitio oficial</a></li>
+          <li><a href="https://www.entradasmillonarios.com/" target="_blank" rel="noopener">Boletería</a></li>
+          <li><a href="https://tiendamillonarios.com.co/" target="_blank" rel="noopener">Tienda MFC</a></li>
+          <li><a href="https://academiadefutbolmillonarios.com.co/" target="_blank" rel="noopener">Academia</a></li>
+          <li><a href="https://www.hinchaembajadordorado.com/" target="_blank" rel="noopener">Hincha Embajador Dorado</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h3 class="footer__title">Desarrollador</h3>
+        <ul>
+          <li>John Alexander Pardo González</li>
+          <li><a href="https://github.com/japago25andes" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/ing-japago" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__disclaimer">
+          <strong>Sitio de hinchas, no oficial.</strong> No está afiliado a Azul &amp; Blanco Millonarios FC S.A.
+          El nombre, el escudo y las marcas pertenecen a sus respectivos dueños.
+        </p>
+        <p>© <span id="year">2026</span> · Proyecto de portafolio · HTML, CSS y JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       ELEMENTOS FLOTANTES Y DIÁLOGOS
+       ========================================================= -->
+
+  <!-- Botón volver arriba -->
+  <a class="to-top" id="to-top" href="#inicio" aria-label="Volver arriba">
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+  </a>
+
+  <!-- Ficha de jugador -->
+  <dialog class="modal" id="player-modal" aria-labelledby="player-modal-name">
+    <button class="icon-btn modal__close" type="button" data-close aria-label="Cerrar ficha">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="modal__body">
+      <div class="modal__photo" id="player-modal-photo"></div>
+      <div class="modal__info">
+        <span class="modal__number" id="player-modal-number"></span>
+        <h3 class="modal__name" id="player-modal-name"></h3>
+        <p class="modal__position" id="player-modal-position"></p>
+        <dl class="modal__data" id="player-modal-data"></dl>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Visor de la galería -->
+  <dialog class="lightbox" id="lightbox" aria-label="Visor de imágenes">
+    <button class="icon-btn lightbox__close" type="button" data-close aria-label="Cerrar visor">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <button class="icon-btn lightbox__nav lightbox__nav--prev" type="button" id="lightbox-prev" aria-label="Imagen anterior">
+      <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+    </button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" id="lightbox-img" src="" alt="">
+      <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+    </figure>
+    <button class="icon-btn lightbox__nav lightbox__nav--next" type="button" id="lightbox-next" aria-label="Imagen siguiente">
+      <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+    </button>
+    <span class="lightbox__counter" id="lightbox-counter"></span>
+  </dialog>
+
+  <!-- Aviso si el navegador tiene JavaScript desactivado -->
+  <noscript>
+    <p class="noscript">Activa JavaScript para ver partidos, noticias, plantilla y tabla de posiciones.</p>
+  </noscript>
+</body>
+</html>
